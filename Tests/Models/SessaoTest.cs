@@ -41,112 +41,88 @@ namespace Tests.Models
         [Test]
         public void DeveReservar1IngressoSeHa1Vaga()
         {
-            // ARRANGE
             Sessao sessao = new Sessao();
             sessao.TotalDeIngressos = 1;
 
-            // ACT
             bool result = sessao.PodeReservar(1);
 
-            // ASSERT
             Assert.IsTrue(result);
         }
 
         [Test]
         public void DeveReservar100IngressoSeHa100Vaga()
         {
-            // ARRANGE
             Sessao sessao = new Sessao();
             sessao.TotalDeIngressos = 100;
 
-            // ACT
             bool result = sessao.PodeReservar(100);
 
-            // ASSERT
             Assert.IsTrue(result);
         }
 
         [Test]
         public void DeveReservar10IngressoSeHa10Vaga()
         {
-            // ARRANGE
             Sessao sessao = new Sessao();
             sessao.TotalDeIngressos = 10;
 
-            // ACT
             bool result = sessao.PodeReservar(10);
 
-            // ASSERT
             Assert.IsTrue(result);
         }
 
         [Test]
         public void DeveReservar10IngressoSeHa100Vaga()
         {
-            // ARRANGE
             Sessao sessao = new Sessao();
             sessao.TotalDeIngressos = 100;
 
-            // ACT
             bool result = sessao.PodeReservar(10);
 
-            // ASSERT
             Assert.IsTrue(result);
         }
 
         [Test]
         public void DeveReservar1IngressoSeHa10Vaga()
         {
-            // ARRANGE
             Sessao sessao = new Sessao();
             sessao.TotalDeIngressos = 10;
 
-            // ACT
             bool result = sessao.PodeReservar(1);
 
-            // ASSERT
             Assert.IsTrue(result);
         }
 
         [Test]
         public void NaoDeveReservar10IngressoSeHa1Vaga()
         {
-            // ARRANGE
             Sessao sessao = new Sessao();
             sessao.TotalDeIngressos = 1;
 
-            // ACT
             bool result = sessao.PodeReservar(10);
 
-            // ASSERT
             Assert.IsFalse(result);
         }
 
         [Test]
         public void NaoDeveReservar500IngressoSeHa100Vaga()
         {
-            // ARRANGE
             Sessao sessao = new Sessao();
             sessao.TotalDeIngressos = 100;
 
-            // ACT
             bool result = sessao.PodeReservar(500);
 
-            // ASSERT
             Assert.IsFalse(result);
         }
 
         [Test]
-        public void NaoDeveReservarQuantidadeDeIngressosNegativo()
+        public void NaoDeveReservarQuantidadeDeIngressosNegativo([Values(-1,-2,-3)] int x)
         {
-            // ARRANGE
             Sessao sessao = new Sessao();
-            sessao.TotalDeIngressos = 1;
+            sessao.TotalDeIngressos = x;
 
-            // ACT
             bool result = sessao.PodeReservar(-1);
 
-            // ASSERT
             Assert.IsFalse(result);
         }
     }
