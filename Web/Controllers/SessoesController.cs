@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using AgileTickets.Web.Models;
 using AgileTickets.Web.Repositorios;
@@ -35,23 +33,6 @@ namespace AgileTickets.Web.Controllers
             return View(agenda.Sessao(sessaoId));
         }
 
-        [RequiresTransaction]
-        public ActionResult ReservarOld(int sessaoId, int quantidade)
-        {
-            Sessao sessao = pegaSessao(sessaoId);
-
-            if (sessao.IngressosDisponiveis > quantidade)
-            {
-                ViewBag.MensagemDeErro = "Você não pode reservar mais do que " + sessao.IngressosDisponiveis + " ingressos!";
-                return RedirectToAction("Exibir", new { id = sessaoId });
-            }
-
-            sessao.Reserva(quantidade);
-            agenda.Atualiza(sessao);
-
-            return RedirectToAction("Index");
-
-        }
         [RequiresTransaction]
         public ActionResult Reservar(int sessaoId, int quantidade)
         {

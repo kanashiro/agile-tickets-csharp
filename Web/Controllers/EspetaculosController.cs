@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using AgileTickets.Web.Repositorios;
 using AgileTickets.Web.Models;
 using AgileTickets.Web.Infra.Database;
@@ -22,8 +18,6 @@ namespace AgileTickets.Web.Controllers
 
         public ActionResult Index()
         {
-            string titulo = "Todos os espetaculos";
-
             ViewBag.Estabelecimentos = estabelecimentos.Todos();
             return View(agenda.Espetaculos());
         }
@@ -34,11 +28,5 @@ namespace AgileTickets.Web.Controllers
 
             return RedirectToAction("Index");
         }
-
-        private ActionResult VoltaPraIndex()
-        {
-            return RedirectToAction("Index");
-        }
-
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using AgileTickets.Web.Repositorios;
 using AgileTickets.Web.Models;
 using AgileTickets.Web.Infra.Database;
@@ -15,7 +11,6 @@ namespace AgileTickets.Web.Controllers
 
         public EstabelecimentosController(DiretorioDeEstabelecimentos estabelecimentos)
         {
-            // guarda estabelecimento
             this.estabelecimentos = estabelecimentos;
         }
 
@@ -31,14 +26,8 @@ namespace AgileTickets.Web.Controllers
 
             estabelecimentos.Salva(estabelecimento);
 
-            // redireciona
             return RedirectToAction("Index");
         }
 
-        private Estabelecimento PopulaEstabelecimento() 
-        {
-            Estabelecimento e = new Estabelecimento();
-            return e;
-        }
     }
 }
