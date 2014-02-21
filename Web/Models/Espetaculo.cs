@@ -7,7 +7,6 @@ namespace AgileTickets.Web.Models
 {
     public class Espetaculo
     {
-        // propriedades
         public virtual int Id { get; set; }
         public virtual string Nome { get; set; }
         public virtual string Descricao { get; set; }
@@ -18,42 +17,41 @@ namespace AgileTickets.Web.Models
         {
             this.Sessoes = new List<Sessao>();
         }
-        /*
-         * Esse metodo eh responsavel por criar sessoes para
-         * o respectivo espetaculo, dado o intervalo de inicio e fim,
-         * mais a periodicidade.
-         * 
-         * O algoritmo funciona da seguinte forma:
-         * - Caso a data de inicio seja 01/01/2010, a data de fim seja 03/01/2010,
-         * e a periodicidade seja DIARIA, o algoritmo cria 3 sessoes, uma 
-         * para cada dia: 01/01, 02/01 e 03/01.
-         * 
-         * - Caso a data de inicio seja 01/01/2010, a data fim seja 31/01/2010,
-         * e a periodicidade seja SEMANAL, o algoritmo cria 5 sessoes, uma
-         * a cada 7 dias: 01/01, 08/01, 15/01, 22/01 e 29/01.
-         * 
-         * Repare que a data da primeira sessao é sempre a data inicial.
-         */
+       
         public virtual IList<Sessao> CriaSessoes(DateTime inicio, DateTime fim, Periodicidade periodicidade)
         {
-            // ALUNO: Não apague esse metodo. Esse sim será usado no futuro! ;)
-            return null;
+            IList<Sessao> sessoes = new List<Sessao>();
+            int dias = (fim.Date - inicio.Date).Days;
+            for (int i = 0; i <= dias; i++)
+            {
+                Sessao sessao = new Sessao();
+                sessao.Espetaculo = this;
+                sessao.Inicio = inicio.AddDays(i);
+
+                sessoes.Add(sessao);
+            }
+
+            return sessoes;
         }
 
         public virtual bool Vagas(int qtd, int min)
         {
             int totDisp = IngressosDisponiveisNasSessoes(min);
 
-            if (totDisp >= qtd && qtd >= 0) return true;
-            else return false;
+            if (totDisp >= qtd && qtd >= 0) 
+                return true;
+            
+            return false;
         }
 
         public virtual bool Vagas(int qtd)
         {
             int totDisp = IngressosDisponiveisNasSessoes(0);
 
-            if (totDisp >= qtd && qtd >= 0) return true;
-            else return false;
+            if (totDisp >= qtd && qtd >= 0) 
+                return true;
+            
+            return false;
         }
 
         private int IngressosDisponiveisNasSessoes(int minimo)
